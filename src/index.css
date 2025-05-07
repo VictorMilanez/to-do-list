@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+body {
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+#root {
+  height: 100vh;
+}

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { List } from "../types/List";
+import iconChecked from "../../public/images/icon-check.svg";
+import iconDelete from "../../public/images/icon-cross.svg";
 
 export const TasksList = () => {
   const [itemInput, setItemInput] = useState("");
@@ -14,6 +16,18 @@ export const TasksList = () => {
     ]);
 
     setItemInput("");
+  };
+
+  const handleDeleteItem = (id: number) => {
+    setList(list.filter((item) => item.id !== id));
+  };
+
+  const toggleItem = (id: number) => {
+    setList(
+      list.map((item) =>
+        item.id === id ? { ...item, checked: !item.checked } : item
+      )
+    );
   };
 
   return (
@@ -43,12 +57,30 @@ export const TasksList = () => {
               key={item.id}
               className="flex items-center gap-4 py-6 text-[hsl(234,39%,85%)] text-xl border-b-2 border-[hsl(237,14%,26%)] last:border-b-0 list-none cursor-pointer"
             >
-              <div className="w-8 h-8 flex items-center justify-center ml-4 border-2 border-[hsl(237,14%,26%)] rounded-full cursor-pointer hover:border-[hsl(237,14%,26%)] hover:border-2 hover:[background:linear-gradient(to_right,hsl(192,100%,67%),hsl(280,87%,65%))] hover:bg-clip-border">
-                <div className="w-6 h-6 rounded-full bg-[hsl(235,24%,19%)]"></div>
+              <div
+                onClick={() => toggleItem(item.id)}
+                className={`w-8 h-8 flex items-center justify-center ml-4 border-2 border-[hsl(237,14%,26%)] rounded-full cursor-pointer hover:border-[hsl(237,14%,26%)] hover:border-2 hover:[background:linear-gradient(to_right,hsl(192,100%,67%),hsl(280,87%,65%))] hover:bg-clip-border ${
+                  item.checked
+                    ? "[background:linear-gradient(to_right,hsl(192,100%,67%),hsl(280,87%,65%))]"
+                    : "border-[hsl(237,14%,26%)]"
+                }`}
+              >
+                {item.checked ? (
+                  <img
+                    src={iconChecked}
+                    alt="ícone check"
+                    className="w-5 h-5"
+                  />
+                ) : (
+                  <div className="w-6 h-6 rounded-full bg-[hsl(235,24%,19%)]"></div>
+                )}
               </div>
               {item.text}
-              <button className="ml-auto pr-6 text-3xl text-[hsl(234,11%,52%)] font-light cursor-pointer">
-                X
+              <button
+                onClick={() => handleDeleteItem(item.id)}
+                className="ml-auto pr-6 text-3xl text-[hsl(234,11%,52%)] font-light cursor-pointer"
+              >
+                <img src={iconDelete} alt="ícone para deletar tarefa" />
               </button>
             </li>
           ))}

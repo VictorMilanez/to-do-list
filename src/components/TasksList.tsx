@@ -1,22 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { List } from "../types/List";
 import iconChecked from "../../public/images/icon-check.svg";
 import iconDelete from "../../public/images/icon-cross.svg";
 
 export const TasksList = () => {
   const [itemInput, setItemInput] = useState("");
-  const [list, setList] = useState<List[]>([]);
+  const [list, setList] = useState<List[]>(() => {
+    const savedList = localStorage.getItem("todoList");
+    return savedList ? JSON.parse(savedList) : [];
+  });
   const [listCompleted, setListCompleted] = useState<
     "all" | "active" | "completed"
   >("all");
 
+  useEffect(() => {
+    localStorage.setItem("todoList", JSON.stringify(list));
+  }, [list]);
+
   const handleAddItem = () => {
     if (itemInput.trim() === "") return;
 
-    setList([
-      ...list,
-      { id: list.length + 1, text: itemInput, checked: false },
-    ]);
+    setList([...list, { id: Date.now(), text: itemInput, checked: false }]);
 
     setItemInput("");
   };
@@ -39,7 +43,7 @@ export const TasksList = () => {
 
   return (
     <>
-      <div className="w-2/5 h-20 flex items-center bg-[hsl(235,24%,19%)] absolute top-1/6 left-[30%] rounded-md">
+      <div className="w-2/5 h-20 flex items-center bg-[hsl(235,24%,19%)] absolute top-1/7 left-[30%] rounded-md">
         <button
           onClick={handleAddItem}
           className="w-8 h-8 ml-4 border-3 border-[hsl(237,14%,26%)] rounded-full cursor-pointer"
@@ -57,7 +61,7 @@ export const TasksList = () => {
           }}
         />
       </div>
-      <div className="w-2/5 h-3/5 flex flex-col items- bg-[hsl(235,24%,19%)] absolute top-2/7 left-[30%] rounded-md">
+      <div className="w-2/5 h-3/5 flex flex-col items- bg-[hsl(235,24%,19%)] absolute top-2/8 left-[30%] rounded-md">
         <div className="overflow-y-auto flex-1">
           {list
             .filter((item) => {
@@ -133,6 +137,11 @@ export const TasksList = () => {
           >
             Clear Completed
           </button>
+        </div>
+      </div>
+      <div className="w-2/5 h-20 flex justify-center items-center bg-[hsl(235,24%,19%)] absolute bottom-[4%] left-[30%] rounded-md">
+        <div className="flex justify-center items-center w-3/4 text-2xl text-[hsl(234,11%,52%)]">
+          <p>Arraste e solte para reordenar a lista</p>
         </div>
       </div>
     </>

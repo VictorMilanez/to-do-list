@@ -1,21 +1,53 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { List } from "../types/List";
 import iconChecked from "../../public/images/icon-check.svg";
 import iconDelete from "../../public/images/icon-cross.svg";
 
 export const TasksList = () => {
   const [itemInput, setItemInput] = useState("");
+
   const [list, setList] = useState<List[]>(() => {
     const savedList = localStorage.getItem("todoList");
     return savedList ? JSON.parse(savedList) : [];
   });
+
   const [listCompleted, setListCompleted] = useState<
     "all" | "active" | "completed"
   >("all");
 
+  const dragItem = useRef<number | null>(null);
+  const dragOverItem = useRef<number | null>(null);
+
   useEffect(() => {
     localStorage.setItem("todoList", JSON.stringify(list));
   }, [list]);
+
+  const dragStart = (event: React.DragEvent) => {
+    const target = event.currentTarget as HTMLElement;
+    dragItem.current = Number(target.dataset.id);
+  };
+
+  const dragEnter = (event: React.DragEvent) => {
+    const target = event.currentTarget as HTMLElement;
+    dragOverItem.current = Number(target.dataset.id);
+  };
+
+  const drop = () => {
+    if (dragItem.current === null || dragOverItem.current === null) return;
+    const copyListItems = [...list];
+    const dragIndex = copyListItems.findIndex(
+      (item) => item.id === dragItem.current
+    );
+    const hoverIndex = copyListItems.findIndex(
+      (item) => item.id === dragOverItem.current
+    );
+    if (dragIndex === -1 || hoverIndex === -1) return;
+    const [draggedItem] = copyListItems.splice(dragIndex, 1);
+    copyListItems.splice(hoverIndex, 0, draggedItem);
+    dragItem.current = null;
+    dragOverItem.current = null;
+    setList(copyListItems);
+  };
 
   const handleAddItem = () => {
     if (itemInput.trim() === "") return;
@@ -71,6 +103,11 @@ export const TasksList = () => {
             })
             .map((item) => (
               <li
+                data-id={item.id}
+                draggable
+                onDragStart={(event) => dragStart(event)}
+                onDragEnter={(event) => dragEnter(event)}
+                onDragEnd={drop}
                 key={item.id}
                 className={`flex items-center gap-4 py-6 text-[hsl(234,39%,85%)] text-xl border-b-2 border-[hsl(237,14%,26%)] last:border-b-0 list-none cursor-pointer ${
                   item.checked ? "line-through" : ""

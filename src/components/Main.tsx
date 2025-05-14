@@ -1,19 +1,20 @@
+//import { useContext } from "react";
 import { TasksList } from "./TasksList";
-import btnLightTheme from "../../public/images/icon-sun.svg";
+import { ThemeTogglerButton } from "./ThemeTogglerButton";
+//import { ThemeContext } from "../contexts/theme-context";
 
 export const Main = () => {
+  //const { themeName } = useContext(ThemeContext);
+
   return (
     <section className="w-full h-full">
-      <div className="h-1/3 flex justify-evenly lg:bg-[url('/images/bg-desktop-dark.jpg')] bg-[url('/images/bg-mobile-dark.jpg')] bg-top bg-no-repeat bg-cover relative">
-        <h1 className="text-white text-5xl font-bold mt-14 pl-12 tracking-[1rem]">
+      <div className="relative flex h-full justify-evenly bg-verylight-grayish dark:bg-dark-blue">
+        <h1 className="text-5xl font-bold mt-14 pl-12 tracking-[1rem] text-dark-blue dark:text-[hsl(234,39%,85%)]">
           TODO
         </h1>
-        <button className="w-10 h-10 mt-14 mr-14 cursor-pointer">
-          <img src={btnLightTheme} alt="" className="w-10 h-10" />
-        </button>
+        <ThemeTogglerButton />
       </div>
       <TasksList />
-      <div className="h-2/3 bg-[hsl(235,21%,11%)]">...</div>
     </section>
   );
 };

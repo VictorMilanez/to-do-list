@@ -75,15 +75,15 @@ export const TasksList = () => {
 
   return (
     <>
-      <div className="w-2/5 h-20 flex items-center bg-[hsl(235,24%,19%)] absolute top-1/7 left-[30%] rounded-md">
+      <div className="w-2/5 h-20 flex items-center bg-verylight-gray dark:bg-dark-desaturatedblue absolute top-1/7 left-[30%] rounded-md">
         <button
           onClick={handleAddItem}
-          className="w-8 h-8 ml-4 border-3 border-[hsl(237,14%,26%)] rounded-full cursor-pointer"
+          className="w-8 h-8 ml-4 rounded-full cursor-pointer border-3 border-verylight-grayish dark:border-verydark-grayishbluetwo"
         ></button>
         <input
           type="text"
           placeholder="Criar uma nova tarefa..."
-          className="ml-10 w-3/4 text-2xl text-[hsl(234,11%,52%)] outline-none"
+          className="w-3/4 ml-10 text-2xl outline-none text-dark-desaturatedblue dark:text-dark-grayishblue"
           value={itemInput}
           onChange={(event) => setItemInput(event.target.value)}
           onKeyDown={(event) => {
@@ -93,8 +93,8 @@ export const TasksList = () => {
           }}
         />
       </div>
-      <div className="w-2/5 h-3/5 flex flex-col items- bg-[hsl(235,24%,19%)] absolute top-2/8 left-[30%] rounded-md">
-        <div className="overflow-y-auto flex-1">
+      <div className="w-2/5 h-3/5 flex flex-col bg-verylight-gray dark:bg-dark-desaturatedblue absolute top-2/8 left-[30%] rounded-md">
+        <div className="flex-1 overflow-y-auto">
           {list
             .filter((item) => {
               if (listCompleted === "completed") return item.checked;
@@ -109,21 +109,18 @@ export const TasksList = () => {
                 onDragEnter={(event) => dragEnter(event)}
                 onDragEnd={drop}
                 key={item.id}
-                className={`flex items-center gap-4 py-6 text-[hsl(234,39%,85%)] text-xl border-b-2 border-[hsl(237,14%,26%)] last:border-b-0 list-none cursor-pointer ${
-                  item.checked ? "line-through" : ""
+                className={`flex items-center gap-4 py-6 text-xl border-b-2 border-verylight-grayish dark:border-verydark-grayishbluetwo last:border-b-0 list-none  ${
+                  item.checked
+                    ? "line-through text-light-grayishdark dark:text-dark-grayishblue"
+                    : "text-dark-desaturatedblue dark:text-verylight-gray"
                 }`}
-                style={{
-                  color: item.checked
-                    ? "hsl(234, 11%, 52%)"
-                    : "hsl(234,39%,85%)",
-                }}
               >
                 <div
                   onClick={() => toggleItem(item.id)}
-                  className={`w-8 h-8 flex items-center justify-center ml-4 border-2 border-[hsl(237,14%,26%)] rounded-full cursor-pointer hover:border-[hsl(237,14%,26%)] hover:border-2 hover:[background:linear-gradient(to_right,hsl(192,100%,67%),hsl(280,87%,65%))] hover:bg-clip-border ${
+                  className={`w-8 h-8 flex items-center justify-center ml-4 border-2 border-verylight-grayish dark:border-verydark-grayishbluetwo rounded-full cursor-pointer hover:border-verydark-grayishbluetwo hover:border-2 hover:[background:linear-gradient(to_right,hsl(192,100%,67%),hsl(280,87%,65%))] hover:bg-clip-border ${
                     item.checked
                       ? "[background:linear-gradient(to_right,hsl(192,100%,67%),hsl(280,87%,65%))]"
-                      : "border-[hsl(237,14%,26%)]"
+                      : "border-verydark-grayishbluetwo"
                   }`}
                 >
                   {item.checked ? (
@@ -133,51 +130,53 @@ export const TasksList = () => {
                       className="w-5 h-5 pr-0.5"
                     />
                   ) : (
-                    <div className="w-7 h-7 rounded-full bg-[hsl(235,24%,19%)]"></div>
+                    <div className="rounded-full w-7 h-7 bg-verylight-gray dark:bg-dark-desaturatedblue"></div>
                   )}
                 </div>
                 {item.text}
                 <button
                   onClick={() => handleDeleteItem(item.id)}
-                  className="ml-auto pr-6 text-3xl text-[hsl(234,11%,52%)] font-light cursor-pointer"
+                  className="pr-6 ml-auto cursor-pointer"
                 >
                   <img src={iconDelete} alt="ícone para deletar tarefa" />
                 </button>
               </li>
             ))}
         </div>
-        <div className="flex justify-between items-center py-4 pl-6 h-22 border-t-2 border-[hsl(237,14%,26%)]">
-          <p className="text-[hsl(234,11%,52%)]">{list.length} items left</p>
+        <div className="flex items-center justify-between py-4 pl-6 border-t-2 h-22 border-verylight-grayish dark:border-verydark-grayishbluetwo">
+          <p className="font-semibold text-dark-grayishblue">
+            {list.length} items left
+          </p>
           <div className="flex gap-4">
             <button
               onClick={() => setListCompleted("all")}
-              className="text-[hsl(220,98%,61%)] cursor-pointer"
+              className="text-[hsl(220,98%,61%)] hover:font-bold font-semibold cursor-pointer"
             >
               All
             </button>
             <button
               onClick={() => setListCompleted("active")}
-              className="text-[hsl(234,11%,52%)] hover:[color:hsl(236,33%,92%)] cursor-pointer"
+              className="font-semibold cursor-pointer text-dark-grayishblue hover:text-dark-desaturatedblue dark:hover:text-light-grayishblue"
             >
               Active
             </button>
             <button
               onClick={() => setListCompleted("completed")}
-              className="text-[hsl(234,11%,52%)] hover:[color:hsl(236,33%,92%)] cursor-pointer"
+              className="font-semibold cursor-pointer text-dark-grayishblue hover:text-dark-desaturatedblue dark:hover:text-light-grayishblue"
             >
               Completed
             </button>
           </div>
           <button
             onClick={() => clearCompletedItems()}
-            className="text-[hsl(234,11%,52%)] pr-6 hover:[color:hsl(236,33%,92%)] cursor-pointer"
+            className="pr-6 font-semibold cursor-pointer text-dark-grayishblue hover:text-dark-desaturatedblue dark:hover:text-light-grayishblue"
           >
             Clear Completed
           </button>
         </div>
       </div>
-      <div className="w-2/5 h-20 flex justify-center items-center bg-[hsl(235,24%,19%)] absolute bottom-[4%] left-[30%] rounded-md">
-        <div className="flex justify-center items-center w-3/4 text-2xl text-[hsl(234,11%,52%)]">
+      <div className="w-2/5 h-20 flex justify-center items-center bg-verylight-gray dark:bg-dark-desaturatedblue absolute bottom-[4%] left-[30%] rounded-md">
+        <div className="flex items-center justify-center w-3/4 text-2xl text-dark-grayishblue">
           <p>Arraste e solte para reordenar a lista</p>
         </div>
       </div>

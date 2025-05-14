@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 body {
   width: 100vw;
@@ -13,4 +14,19 @@ body {
 html,
 #root {
   height: 100vh;
+}
+
+@theme {
+  --color-dark-blue: hsl(235, 21%, 11%);
+  --color-dark-desaturatedblue: hsl(235, 24%, 19%);
+  --color-grayish-blue: hsl(234, 39%, 85%);
+  --color-light-grayishblue: hsl(236, 33%, 92%);
+  --color-dark-grayishblue: hsl(234, 11%, 52%);
+  --color-verydark-grayishblue: hsl(233, 14%, 35%);
+  --color-verydark-grayishbluetwo: hsl(237, 14%, 26%);
+  --color-verylight-gray: hsl(0, 0%, 98%);
+  --color-verylight-grayish: hsl(236, 33%, 92%);
+  --color-light-grayish: hsl(233, 11%, 84%);
+  --color-light-grayishdark: hsl(236, 9%, 61%);
+  --color-light-darkgrayish: hsl(235, 19%, 35%);
 }

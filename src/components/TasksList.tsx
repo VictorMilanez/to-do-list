@@ -109,7 +109,7 @@ export const TasksList = () => {
                 onDragEnter={(event) => dragEnter(event)}
                 onDragEnd={drop}
                 key={item.id}
-                className={`flex items-center gap-4 py-6 text-xl border-b-2 border-verylight-grayish dark:border-verydark-grayishbluetwo last:border-b-0 list-none  ${
+                className={`flex items-center gap-4 py-6 text-xl border-b-2 border-verylight-grayish dark:border-verydark-grayishbluetwo last:border-b-0 list-none cursor-pointer  ${
                   item.checked
                     ? "line-through text-light-grayishdark dark:text-dark-grayishblue"
                     : "text-dark-desaturatedblue dark:text-verylight-gray"

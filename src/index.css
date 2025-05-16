@@ -17,6 +17,7 @@ html,
 }
 
 @theme {
+  /* Colors */
   --color-dark-blue: hsl(235, 21%, 11%);
   --color-dark-desaturatedblue: hsl(235, 24%, 19%);
   --color-grayish-blue: hsl(234, 39%, 85%);

@@ -9,12 +9,20 @@ export const ThemeTogglerButton = () => {
   return (
     <button
       onClick={() => toggleTheme()}
-      className="w-10 h-10 cursor-pointer mt-14 mr-14"
+      className="cursor-pointer lg:w-10 lg:h-10 sm:w-8 sm:h-8 lg:mt-4 xl:mr-2 md:mr-32 sm:pt-10"
     >
       {themeName === "dark" ? (
-        <img src={btnLightTheme} alt="" className="w-10 h-10" />
+        <img
+          src={btnLightTheme}
+          alt=""
+          className="lg:w-10 lg:h-10 sm:w-8 sm:h-8"
+        />
       ) : (
-        <img src={btnDarkTheme} alt="" className="w-10 h-10" />
+        <img
+          src={btnDarkTheme}
+          alt=""
+          className="lg:w-10 lg:h-10 sm:w-8 sm:h-8"
+        />
       )}
     </button>
   );

@@ -75,7 +75,7 @@ export const TasksList = () => {
 
   return (
     <>
-      <div className="w-2/5 h-20 flex items-center bg-verylight-gray dark:bg-dark-desaturatedblue absolute top-1/7 left-[30%] rounded-md">
+      <div className="lg:w-2/5 sm:w-3/5 h-20 flex items-center bg-verylight-gray dark:bg-dark-desaturatedblue absolute top-1/7 lg:left-[30%] sm:left-[20%] rounded-md">
         <button
           onClick={handleAddItem}
           className="w-8 h-8 ml-4 rounded-full cursor-pointer border-3 border-verylight-grayish dark:border-verydark-grayishbluetwo"
@@ -93,7 +93,7 @@ export const TasksList = () => {
           }}
         />
       </div>
-      <div className="w-2/5 h-3/5 flex flex-col bg-verylight-gray dark:bg-dark-desaturatedblue absolute top-2/8 left-[30%] rounded-md">
+      <div className="lg:w-2/5 sm:w-3/5 h-3/5 flex flex-col bg-verylight-gray dark:bg-dark-desaturatedblue absolute top-2/8 lg:left-[30%] sm:left-[20%] rounded-md">
         <div className="flex-1 overflow-y-auto">
           {list
             .filter((item) => {
@@ -144,40 +144,40 @@ export const TasksList = () => {
             ))}
         </div>
         <div className="flex items-center justify-between py-4 pl-6 border-t-2 h-22 border-verylight-grayish dark:border-verydark-grayishbluetwo">
-          <p className="font-semibold text-dark-grayishblue">
+          <p className="font-semibold xl:text-xl sm:text-sm sm:text-center lg:text-base text-dark-grayishblue">
             {list.length} items left
           </p>
           <div className="flex gap-4">
             <button
               onClick={() => setListCompleted("all")}
-              className="text-[hsl(220,98%,61%)] hover:font-bold font-semibold cursor-pointer"
+              className="text-[hsl(220,98%,61%)] xl:text-xl lg:text-base sm:text-sm hover:font-bold font-semibold cursor-pointer"
             >
               All
             </button>
             <button
               onClick={() => setListCompleted("active")}
-              className="font-semibold cursor-pointer text-dark-grayishblue hover:text-dark-desaturatedblue dark:hover:text-light-grayishblue"
+              className="font-semibold cursor-pointer xl:text-xl lg:text-base text-dark-grayishblue hover:text-dark-desaturatedblue dark:hover:text-light-grayishblue"
             >
               Active
             </button>
             <button
               onClick={() => setListCompleted("completed")}
-              className="font-semibold cursor-pointer text-dark-grayishblue hover:text-dark-desaturatedblue dark:hover:text-light-grayishblue"
+              className="font-semibold cursor-pointer xl:text-xl lg:text-base sm:text-sm text-dark-grayishblue hover:text-dark-desaturatedblue dark:hover:text-light-grayishblue"
             >
               Completed
             </button>
           </div>
           <button
             onClick={() => clearCompletedItems()}
-            className="pr-6 font-semibold cursor-pointer text-dark-grayishblue hover:text-dark-desaturatedblue dark:hover:text-light-grayishblue"
+            className="font-semibold cursor-pointer lg:pr-6 sm:pr-4 xl:text-xl lg:text-base sm:text-sm text-dark-grayishblue hover:text-dark-desaturatedblue dark:hover:text-light-grayishblue"
           >
             Clear Completed
           </button>
         </div>
       </div>
-      <div className="w-2/5 h-20 flex justify-center items-center bg-verylight-gray dark:bg-dark-desaturatedblue absolute bottom-[4%] left-[30%] rounded-md">
-        <div className="flex items-center justify-center w-3/4 text-2xl text-dark-grayishblue">
-          <p>Arraste e solte para reordenar a lista</p>
+      <div className="lg:w-2/5 sm:w-3/5 h-20 flex justify-center items-center bg-verylight-gray dark:bg-dark-desaturatedblue absolute bottom-[4%] lg:left-[30%] sm:left-[20%] lg:border-none sm:border-t sm:border-verylight-grayish rounded-md">
+        <div className="flex items-center justify-center lg:text-2xl sm:text-base lg:w-3/4 lg:text-center text-dark-grayishblue">
+          <p>Arraste e solte para reordenar</p>
         </div>
       </div>
     </>
